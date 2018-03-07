@@ -1,0 +1,79 @@
+{% extends "front-end/layout/layout.html" %}
+{% block content %}
+<div class="content">
+    <div class="container">
+        <div class="content-text">
+            <div class="title">
+            {% for item in post_list %}
+                <div class="some-title">
+                    <h3><a href="/entry/{{ item.slug }}-{{ item.id }}.html">{{ item.title }}</a></h3>
+                </div>
+                {% if item.user.firstname != None and item.user.firstname != '' and item.user.lastname != None and item.user.lastname != '' %}
+                <div class="john">
+                    <p><a href="#">{{ item.user.firstname }} {{ item.user.lastname }}</a><span>{{ item.created }}</span></p>
+                </div>
+                {% elif item.user.firstname != None and item.user.firstname != '' %}
+                <div class="john">
+                    <p><a href="#">{{ item.user.firstname }}</a><span>{{ item.created }}</span></p>
+                </div>
+                {% elif item.user.lastname != None and item.user.lastname != '' %}
+                <div class="john">
+                    <p><a href="#">{{ item.user.lastname }}</a><span>{{ item.created }}</span></p>
+                </div>
+                {% else %}
+                <div class="john">
+                    <p>&nbsp;<span>{{ item.created }}</span></p>
+                </div>
+                {% endif %}
+                <div class="clearfix"> </div>
+                <div class="tilte-grid">
+                {% if item.summary != None and item.summary != '' %}
+                    <p class="vel" style="font-weight: bold; padding-bottom: 10px">{{ item.summary }}</p>
+                {% endif %}
+                {% if item.image != None and item.image != '' %}
+                    <a href="/entry/{{ item.slug }}-{{ item.id }}.html"><img src="{{ item.image }}" alt="{{ item.title }}" class="img-responsive center-block" /></a>
+                {% endif %}
+                </div>
+                <div class="content-entry" style="padding: 10px 0px; text-align: justify">
+                {% if item.content | safe | length > 1000 %}
+                    {{ item.content[:1000] | safe }}
+                {% else %}
+                    {{ item.content | safe }}
+                {% endif %}
+                </div>
+                <div class="read">
+                    <a href="/entry/{{ item.slug }}-{{ item.id }}.html">Read More</a>
+                </div>
+                <div class="border">
+                    <p>a</p>
+                </div>
+            {% endfor %}
+                <div class="border1">
+                    <div class="pre">
+                        <a href="#">Prev</a>
+                    </div>
+                    <div class="number">
+                        <ul>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#">7</a></li>
+                        </ul>
+                    </div>
+                    <div class="next">
+                        <a href="#">Next</a>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+            <div class="categories">
+                {% include "front-end/layout/right_content.html" %}
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

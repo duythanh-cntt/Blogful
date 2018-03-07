@@ -1,0 +1,31 @@
+{% extends "front-end/layout/layout.html" %}
+{% block content %}
+<div class="articles">
+	<div class="container">
+		<div class="article">
+			<div class="article-left">
+				{% include "front-end/layout/right_content.html" %}
+			</div>
+			<div class="article-right">
+				<h3>{{ category_name }}</h3>
+				<div class="article-right-grids">
+                {% for item in entry_category %}
+					<div class="article-right-grid">
+                        {% if item.image != None and item.image != '' %}
+                            <a href="/entry/{{ item.slug }}-{{ item.id }}.html"><img src="{{ item.image }}" alt="{{ item.title }}" class="img-responsive center-block" /></a>
+                        {% endif %}
+						<h4><a href="/entry/{{ item.slug }}-{{ item.id }}.html">{{ item.title }}</a></h4>
+						{% if item.summary != None and item.summary != '' %}
+                            <p>{{ item.summary }}</p>
+                        {% endif %}
+					</div>
+                {% endfor %}
+					<div class="clearfix"> </div>
+				</div>
+
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+{% endblock %}
